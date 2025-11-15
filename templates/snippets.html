@@ -1,0 +1,294 @@
+<style>
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: var(--z-sticky);
+        padding: var(--space-4) 0;
+    }
+
+    .navbar-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-6);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        font-family: var(--font-heading);
+        font-size: var(--text-xl);
+        font-weight: 700;
+        color: var(--text-heading);
+        text-decoration: none;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: var(--space-6);
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--text-secondary);
+        font-weight: 500;
+        transition: color var(--transition-fast);
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 300ms ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .nav-links a.active {
+        color: var(--primary);
+    }
+
+    .nav-links a.active::after {
+        width: 100%;
+    }
+
+    .page-header {
+        max-width: 1200px;
+        margin: var(--space-10) auto var(--space-8);
+        padding: 0 var(--space-6);
+    }
+
+    .page-title {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-3);
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+    }
+
+    .page-description {
+        font-size: var(--text-lg);
+        color: var(--text-secondary);
+    }
+
+    .snippets-section {
+        max-width: 1200px;
+        margin: 0 auto var(--space-12);
+        padding: 0 var(--space-6);
+    }
+
+    .snippets-grid {
+        display: grid;
+        gap: var(--space-6);
+    }
+
+    .snippet-card {
+        background: var(--glass-bg-card);
+        backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        transition: all var(--transition-base);
+    }
+
+    .snippet-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(96, 165, 250, 0.4);
+    }
+
+    .snippet-header {
+        padding: var(--space-5);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+
+    .snippet-title {
+        font-size: var(--text-xl);
+        font-weight: 600;
+        color: var(--text-heading);
+        margin-bottom: var(--space-2);
+    }
+
+    .snippet-description {
+        color: var(--text-secondary);
+        font-size: var(--text-sm);
+    }
+
+    .copy-btn {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-md);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-sm);
+        transition: all var(--transition-fast);
+        flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        transform: scale(1.05);
+    }
+
+    .copy-btn.copied {
+        background: var(--success);
+        color: white;
+        border-color: var(--success);
+    }
+
+    .snippet-code {
+        background: rgba(0, 0, 0, 0.3);
+        padding: var(--space-5);
+        overflow-x: auto;
+    }
+
+    .snippet-code pre {
+        margin: 0;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .snippet-code code {
+        background: transparent !important;
+        padding: 0 !important;
+        color: inherit !important;
+        font-size: var(--text-sm) !important;
+        line-height: 1.6 !important;
+    }
+
+    .snippet-footer {
+        padding: var(--space-4) var(--space-5);
+        border-top: 1px solid var(--border-subtle);
+        display: flex;
+        gap: var(--space-2);
+    }
+
+    .footer {
+        background: var(--glass-bg);
+        backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
+        border-top: 1px solid var(--border-subtle);
+        padding: var(--space-8) 0;
+        margin-top: var(--space-12);
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-6);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-text {
+        color: var(--text-muted);
+    }
+
+    .social-links {
+        display: flex;
+        gap: var(--space-4);
+        list-style: none;
+    }
+
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--glass-bg-card);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        color: var(--text-secondary);
+        transition: all var(--transition-fast);
+    }
+
+    .social-links a:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+        border-color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+
+        .footer-content {
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+    }
+</style>
+
+<!-- Page Header -->
+<header class="page-header">
+    <h1 class="page-title">💡 Сниппеты и подсказки</h1>
+    <p class="page-description">Коллекция полезных команд, скриптов и конфигураций</p>
+</header>
+
+<!-- Snippets -->
+<section class="snippets-section">
+    <div class="snippets-grid">
+        {{ snippetCards }}
+    </div>
+</section>
+
+<script>
+    function copySnippet(btn, snippetId) {
+        const snippetEl = document.getElementById(snippetId);
+        const codeEl = snippetEl.querySelector('code');
+        const code = codeEl ? codeEl.textContent : snippetEl.textContent;
+
+        navigator.clipboard.writeText(code).then(() => {
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="check" style="width: 16px; height: 16px;"></i> Скопировано!';
+            btn.classList.add('copied');
+            lucide.createIcons();
+
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('copied');
+                lucide.createIcons();
+            }, 2000);
+        });
+    }
+</script>
