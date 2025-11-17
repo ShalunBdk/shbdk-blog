@@ -110,6 +110,7 @@
 
 html {
     scroll-behavior: smooth;
+    min-height: 100%;
 }
 
 body {
@@ -119,6 +120,7 @@ body {
         var(--bg-tertiary) 50%,
         var(--bg-accent) 100%) !important;
     background-attachment: fixed !important;
+    min-height: 100vh;
     color: var(--text-primary) !important;
     line-height: 1.6 !important;
     font-size: var(--text-base) !important;
@@ -343,6 +345,18 @@ pre code {
         --text-5xl: 2rem;
         --text-4xl: 1.75rem;
         --text-3xl: 1.5rem;
+    }
+
+    html {
+        min-height: 100%;
+    }
+
+    body {
+        /* Fix for mobile browsers - use scroll instead of fixed */
+        background-attachment: scroll !important;
+        min-height: 100vh;
+        /* Ensure background covers entire page on mobile */
+        background-size: 100% 100%;
     }
 
     .glass-container {
