@@ -25,7 +25,11 @@
                 <span>Alexander Shalin</span>
             </a>
 
-            <ul class="nav-links">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="{{ basePath }}/index.html" class="{{ activeNav === 'home' ? 'active' : '' }}">Заметки</a></li>
                 <li><a href="{{ basePath }}/snippets.html" class="{{ activeNav === 'snippets' ? 'active' : '' }}">Сниппеты</a></li>
                 <li><a href="{{ basePath }}/projects.html" class="{{ activeNav === 'projects' ? 'active' : '' }}">Проекты</a></li>
@@ -64,6 +68,46 @@
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const menuIcon = mobileMenuBtn?.querySelector('i');
+
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+
+                // Toggle icon between menu and X
+                if (navLinks.classList.contains('active')) {
+                    menuIcon.setAttribute('data-lucide', 'x');
+                } else {
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                }
+
+                // Reinitialize icons
+                lucide.createIcons();
+            });
+
+            // Close menu when clicking on a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navLinks.contains(event.target) || mobileMenuBtn.contains(event.target);
+                if (!isClickInsideNav && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
+            });
+        }
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
