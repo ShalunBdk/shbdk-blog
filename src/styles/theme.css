@@ -562,6 +562,7 @@ pre code {
         top: 72px;
         left: 0;
         right: 0;
+        display: none;
         flex-direction: column;
         align-items: stretch;
         gap: 0;
@@ -570,13 +571,11 @@ pre code {
         -webkit-backdrop-filter: blur(40px);
         border-bottom: 1px solid var(--border-subtle);
         padding: var(--space-4);
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
         transition: all var(--transition-base);
     }
 
     .nav-links.active {
+        display: flex;
         max-height: 500px;
         opacity: 1;
     }
