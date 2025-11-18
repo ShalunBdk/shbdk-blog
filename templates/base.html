@@ -79,22 +79,25 @@
                 navLinks.classList.toggle('active');
 
                 // Toggle icon between menu and X
-                if (navLinks.classList.contains('active')) {
-                    menuIcon.setAttribute('data-lucide', 'x');
-                } else {
-                    menuIcon.setAttribute('data-lucide', 'menu');
+                if (menuIcon) {
+                    if (navLinks.classList.contains('active')) {
+                        menuIcon.setAttribute('data-lucide', 'x');
+                    } else {
+                        menuIcon.setAttribute('data-lucide', 'menu');
+                    }
+                    // Reinitialize icons
+                    lucide.createIcons();
                 }
-
-                // Reinitialize icons
-                lucide.createIcons();
             });
 
             // Close menu when clicking on a link
             navLinks.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', function() {
                     navLinks.classList.remove('active');
-                    menuIcon.setAttribute('data-lucide', 'menu');
-                    lucide.createIcons();
+                    if (menuIcon) {
+                        menuIcon.setAttribute('data-lucide', 'menu');
+                        lucide.createIcons();
+                    }
                 });
             });
 
@@ -103,8 +106,10 @@
                 const isClickInsideNav = navLinks.contains(event.target) || mobileMenuBtn.contains(event.target);
                 if (!isClickInsideNav && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
-                    menuIcon.setAttribute('data-lucide', 'menu');
-                    lucide.createIcons();
+                    if (menuIcon) {
+                        menuIcon.setAttribute('data-lucide', 'menu');
+                        lucide.createIcons();
+                    }
                 }
             });
         }
