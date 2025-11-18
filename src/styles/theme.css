@@ -444,11 +444,17 @@ pre code {
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-fast);
+    position: relative;
+    z-index: var(--z-dropdown);
 }
 
 .mobile-menu-btn:hover {
     background: var(--glass-bg-card);
     border-color: var(--primary);
+}
+
+.mobile-menu-btn:active {
+    transform: scale(0.95);
 }
 
 .mobile-menu-btn svg {
