@@ -346,8 +346,9 @@ const build = async () => {
   // Копирование VLESS инструкции
   const vlessSource = path.join(ROOT, 'vless_instructions.html');
   if (await fs.pathExists(vlessSource)) {
-    await fs.copy(vlessSource, path.join(ROOT, 'dist/instruct.html'));
-    console.log('✓ Скопировали instruct.html');
+    await fs.ensureDir(path.join(ROOT, 'dist/instruct'));
+    await fs.copy(vlessSource, path.join(ROOT, 'dist/instruct/index.html'));
+    console.log('✓ Скопировали instruct/index.html');
   }
 
   console.log('\n✅ Сборка завершена! Результат в dist/\n');
