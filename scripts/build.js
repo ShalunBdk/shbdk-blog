@@ -343,6 +343,13 @@ const build = async () => {
   await fs.writeFile(path.join(ROOT, 'dist/projects.html'), projectsPage);
   console.log('✓ Создали projects.html');
 
+  // Копирование VLESS инструкции
+  const vlessSource = path.join(ROOT, 'vless_instructions.html');
+  if (await fs.pathExists(vlessSource)) {
+    await fs.copy(vlessSource, path.join(ROOT, 'dist/instruct.html'));
+    console.log('✓ Скопировали instruct.html');
+  }
+
   console.log('\n✅ Сборка завершена! Результат в dist/\n');
 };
 
